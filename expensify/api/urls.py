@@ -16,9 +16,18 @@ Including another URLconf
 """
 from django.urls import path,include
 from api.views import CreateListCategoryView,DeleteCategoryView,UpdateCategoryView
-
+from api.views import CreateListExpenseView,DeleteExpenseView,UpdateExpenseView
+from api.views import CreateListIncomeView, DeleteIncomeView, UpdateIncomeView
 urlpatterns = [
     path('category/create/',CreateListCategoryView.as_view(),name='create_list_category'),
     path('category/delete/<int:pk>/',DeleteCategoryView.as_view(),name='delete_category'),
-    path('category/update/<int:pk>/',UpdateCategoryView.as_view(),name='update_category')
+    path('category/update/<int:pk>/',UpdateCategoryView.as_view(),name='update_category'),
+
+    path('expense/create/',CreateListExpenseView.as_view(),name='create_list_expenses'),
+    path('expense/delete/<int:pk>/',DeleteExpenseView.as_view(),name='delete_expense'),
+    path('expense/update/<int:pk>/',UpdateExpenseView.as_view(),name='update_expense'),
+    
+    path('income/create/',CreateListIncomeView.as_view(),name='create_list_income'),
+    path('income/delete/<int:pk>/',DeleteIncomeView.as_view(),name='delete_income'),
+    path('income/update/<int:pk>/',UpdateIncomeView.as_view(),name='update_income'),
 ]
