@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.models import User
 from .models import Categories
-from .serializers import UserSerializer,CategorySerializer
+from .serializers import UserSerializer,CategorySerializer,ExpenseSerializer,IncomeSerializer
 from rest_framework import generics
 from rest_framework.permissions import AllowAny,IsAuthenticated
 
@@ -40,3 +40,56 @@ class DeleteCategoryView(generics.DestroyAPIView):
         user = self.request.user
         return Categories.objects.filter(user=user)
     
+class CreateListExpenseView(generics.ListCreateAPIView):
+    serializer_class = ExpenseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Categories.objects.filter(user=user)
+    
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+
+class UpdateExpenseView(generics.UpdateAPIView):
+    serializer_class = ExpenseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Categories.objects.filter(user=user)
+
+class DeleteExpenseView(generics.DestroyAPIView):
+    serializer_class = ExpenseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Categories.objects.filter(user=user)
+
+class CreateListIncomeView(generics.ListCreateAPIView):
+    serializer_class = IncomeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Categories.objects.filter(user=user)
+    
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+
+class UpdateIncomeView(generics.UpdateAPIView):
+    serializer_class = IncomeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Categories.objects.filter(user=user)
+
+class DeleteIncomeView(generics.DestroyAPIView):
+    serializer_class = IncomeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Categories.objects.filter(user=user)
