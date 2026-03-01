@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Categories
+from .models import Categories,Expenses,Income
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -17,3 +19,13 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Categories
         fields = '__all__'
         
+class ExpenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expenses
+        fields = '__all__'
+
+class IncomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Income
+        field = '__all__'
+
