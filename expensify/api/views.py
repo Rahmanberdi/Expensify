@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.models import User
-from .models import Categories
+from .models import Categories,Expenses,Income
 from .serializers import UserSerializer,CategorySerializer,ExpenseSerializer,IncomeSerializer
 from rest_framework import generics
 from rest_framework.permissions import AllowAny,IsAuthenticated
@@ -46,7 +46,7 @@ class CreateListExpenseView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Categories.objects.filter(user=user)
+        return Expenses.objects.filter(user=user)
     
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
@@ -57,7 +57,7 @@ class UpdateExpenseView(generics.UpdateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Categories.objects.filter(user=user)
+        return Expenses.objects.filter(user=user)
 
 class DeleteExpenseView(generics.DestroyAPIView):
     serializer_class = ExpenseSerializer
@@ -65,7 +65,7 @@ class DeleteExpenseView(generics.DestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Categories.objects.filter(user=user)
+        return Expenses.objects.filter(user=user)
 
 class CreateListIncomeView(generics.ListCreateAPIView):
     serializer_class = IncomeSerializer
@@ -73,7 +73,7 @@ class CreateListIncomeView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Categories.objects.filter(user=user)
+        return Income.objects.filter(user=user)
     
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
@@ -84,7 +84,7 @@ class UpdateIncomeView(generics.UpdateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Categories.objects.filter(user=user)
+        return Income.objects.filter(user=user)
 
 class DeleteIncomeView(generics.DestroyAPIView):
     serializer_class = IncomeSerializer
@@ -92,4 +92,4 @@ class DeleteIncomeView(generics.DestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Categories.objects.filter(user=user)
+        return Income.objects.filter(user=user)
