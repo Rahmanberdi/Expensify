@@ -21,6 +21,7 @@ class Categories(models.Model):
     )
     class Meta:
         verbose_name_plural = "Categories"
+        ordering = ['id']
 
     def __str__(self):
         return f"{self.title}"
@@ -39,6 +40,9 @@ class Expenses(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     transaction_date = models.DateField()
 
+    class Meta:
+        ordering = ['-transaction_date', '-created_at']
+
     def __str__(self):
         return f"{self.amount}¥"
     
@@ -56,6 +60,9 @@ class Income(models.Model):
     description = models.TextField(blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     transaction_date = models.DateField()
+
+    class Meta:
+        ordering = ['-transaction_date', '-created_at']
 
     def __str__(self):
         return f"{self.amount}¥"
